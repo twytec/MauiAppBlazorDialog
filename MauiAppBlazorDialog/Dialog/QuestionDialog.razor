@@ -1,0 +1,60 @@
+﻿
+<div class="dialogOut" style="display: @showState;">
+    <div style="display: grid; width: 100%; height: 100vh;">
+        <div class="dialogBox">
+            <div style="display: grid; grid-template-rows: 40px auto 40px;">
+                <button style="justify-self: right; width: 40px; height: 40px; margin-right: -18px; margin-top: -18px;" class="btn btn-danger" @onclick="Hide">X</button>
+
+                <p>@_text</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; column-gap: 4px;">
+                    <button class="btn btn-primary" @onclick="Yes">Ja</button>
+                    <button class="btn btn-secondary" @onclick="No">Nein</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    bool isShow = false;
+    string showState => isShow ? "block" : "none";
+    string _text = "";
+    bool _ok = false;
+
+    public async Task<bool> ShowAsync(string text)
+    {
+        _ok = false;
+        _text = text;
+
+        isShow = true;
+        StateHasChanged();
+
+        while (isShow)
+        {
+            await Task.Delay(500);
+        }
+
+        StateHasChanged();
+        return _ok;
+    }
+
+    void Hide()
+    {
+        isShow = false;
+    }
+
+    void Yes()
+    {
+        _ok = true;
+        isShow = false;
+    }
+
+    void No()
+    {
+        _ok = false;
+        isShow = false;
+    }
+}
+

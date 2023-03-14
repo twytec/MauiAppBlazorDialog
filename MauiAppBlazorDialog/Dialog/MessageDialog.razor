@@ -1,0 +1,41 @@
+﻿
+<div class="dialogOut" style="display: @showState;">
+    <div style="display: grid; width: 100%; height: 100vh;">
+        <div class="dialogBox">
+            <div style="display: grid; grid-template-rows: 40px auto;">
+                <button style="justify-self: right; width: 40px; height: 40px; margin-right: -18px; margin-top: -18px;" class="btn btn-danger" @onclick="Hide">X</button>
+
+                <p>@((MarkupString)_text)</p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    bool isShow = false;
+    string showState => isShow ? "block" : "none";
+    string _text = "";
+
+    public async Task ShowAsync(string text)
+    {
+        _text = text;
+
+        isShow = true;
+        StateHasChanged();
+
+        while (isShow)
+        {
+            await Task.Delay(500);
+        }
+
+        StateHasChanged();
+    }
+
+    void Hide()
+    {
+        isShow = false;
+    }
+}
+

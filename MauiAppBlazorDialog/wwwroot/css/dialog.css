@@ -1,0 +1,55 @@
+﻿.busy-ring {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+}
+
+    .busy-ring:after {
+        content: " ";
+        display: block;
+        width: 64px;
+        height: 64px;
+        margin: 8px;
+        border-radius: 50%;
+        border: 6px solid dodgerblue;
+        border-color: dodgerblue transparent dodgerblue transparent;
+        animation: busy-ring 1.2s linear infinite;
+    }
+
+@keyframes busy-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.dialogOut {
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    z-index: 3000;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+
+.dialogBox {
+    background-color: #ffffff;
+    padding: 20px;
+    max-width: 80%;
+    min-width: 300px;
+    max-height: 80vh;
+    overflow-y: auto;
+    align-self: center;
+    justify-self: center;
+    border: 1px solid #1e90ff;
+}
+
+    .dialogBox p {
+        color: #000000;
+    }

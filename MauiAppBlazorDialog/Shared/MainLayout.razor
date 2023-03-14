@@ -1,0 +1,39 @@
+﻿@inherits LayoutComponentBase
+@inject Data.DialogService dlg
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+        </div>
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+
+<MauiAppBlazorDialog.Dialog.MessageDialog @ref="messageDialog" />
+<MauiAppBlazorDialog.Dialog.QuestionDialog @ref="questionDialog" />
+<MauiAppBlazorDialog.Dialog.BusyDialog @ref="busyDialog" />
+
+@code {
+
+    Dialog.BusyDialog busyDialog;
+    Dialog.MessageDialog messageDialog;
+    Dialog.QuestionDialog questionDialog;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            dlg.BusyDialog = busyDialog;
+            dlg.MessageDialog = messageDialog;
+            dlg.QuestionDialog = questionDialog;
+        }
+    }
+}
